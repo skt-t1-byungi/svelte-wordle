@@ -85,7 +85,13 @@ export function dispatch<K extends keyof Events>(name: K, ...args: Parameters<Ev
 }
 
 export function wait<K extends keyof Events>(name: K) {
-    return new Promise<Parameters<Events[K]>[0]>((resolve: Events[K]) => ee.on(name, resolve))
+    type Arg = Parameters<Events[K]>[0]
+    return new Promise<Arg>(resolve => {
+        const off = ee.on(name, ((v: Arg) => {
+            off()
+            resolve(v)
+        }) as any)
+    })
 }
 
 export function getAlphaStatus(alpha: string, index: number) {
