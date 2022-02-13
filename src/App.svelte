@@ -28,7 +28,7 @@
 
 {#if $status === 'before'}
     <Modal>
-        <h1>Welcome <span class="font-present text-mulberry-600">WORLDE</span></h1>
+        <h1>Welcome <span class="font-present text-mulberry-600">WORDLE</span></h1>
         <p class="mb-4">Pleas press start</p>
         <button on:click={start}>start</button>
     </Modal>
