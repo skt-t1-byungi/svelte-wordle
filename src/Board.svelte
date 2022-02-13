@@ -3,15 +3,17 @@
         alpha?: string
         status: typeof ALPHA_STATUS
     }
-    const EMPTY_ROWS: Cell[][] = Array(6).fill(Array(5).fill({ status: 'none' }))
+    const EMPTY_ROWS: Cell[][] = Array(6).fill(Array(5).fill({ status: ALPHA_STATUS.NONE }))
 </script>
 
 <script lang="ts">
     import cx from 'clsx'
     import { defaults } from 'lodash-es'
-    import { getAlphaStatus, state } from './store'
+    import { getAlphaStatus, state, wait } from './store'
     import { ALPHA_STATUS } from './const'
-    const { history, alphas, answer } = state
+    import delay from 'delay'
+    import { onDestroy, tick } from 'svelte'
+    const { history, alphas } = state
 
     $: rows = defaults(
         [
@@ -28,23 +30,62 @@
         ],
         EMPTY_ROWS
     ).slice(0, 6) as Cell[][]
+
+    let destroyed = false
+    let shakeRow = -1
+    onDestroy(() => (destroyed = true))
+    ;(async () => {
+        while (true) {
+            await wait('wrong')
+            if (destroyed) return
+            shakeRow = $history.length
+            await delay(500)
+            if (destroyed) return
+            shakeRow = -1
+        }
+    })()
 </script>
 
 <div class="grid gap-y-4 gap-x-2 grid-cols-5">
-    {#each rows as row}
+    {#each rows as row, rowIdx}
         {#each row as cell}
             <span
                 class={cx(
-                    'aspect-square rounded flex items-center justify-center uppercase box-border border-4 border-gray-300',
+                    'aspect-square rounded flex items-center justify-center uppercase box-border shadow-inner font-present text-lg transition-all duration-50',
                     {
-                        [ALPHA_STATUS.CORRECT]: 'bg-green-300 border-green-400',
-                        [ALPHA_STATUS.CONTAINS]: 'bg-orange-300 border-orange-400',
-                        [ALPHA_STATUS.WRONG]: 'bg-gray-300',
+                        [ALPHA_STATUS.CORRECT]: 'bg-green-300 text-green-600',
+                        [ALPHA_STATUS.CONTAINS]: 'bg-orange-300 text-orange-500',
+                        [ALPHA_STATUS.WRONG]: 'bg-white-linen-700 text-white-linen-600',
+                        [ALPHA_STATUS.NONE]: 'bg-lochinvar-300 text-lochinvar-600 ',
                     }[String(cell.status)]
                 )}
+                class:shake={shakeRow === rowIdx}
             >
                 {cell.alpha ?? ''}
             </span>
         {/each}
     {/each}
 </div>
+
+<style>
+    .shake {
+        animation: shake 0.5s 1;
+        @apply bg-red-300 text-red-600;
+    }
+    @keyframes shake {
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+            transform: translate(-10px, 0);
+        }
+        20%,
+        40%,
+        60%,
+        80%,
+        100% {
+            transform: translate(10px, 0);
+        }
+    }
+</style>

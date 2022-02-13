@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { beforeUpdate, createEventDispatcher } from 'svelte'
+    import { onMount, createEventDispatcher } from 'svelte'
 
     export let show = true
     const dispatch = createEventDispatcher()
     let el: HTMLDivElement
 
-    beforeUpdate(() => {
+    onMount(() => {
         if (el) document.body.append(el)
     })
 

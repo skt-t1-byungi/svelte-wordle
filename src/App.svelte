@@ -12,8 +12,8 @@
 </script>
 
 <main class="text-center max-w-xl mx-auto select-none">
-    <h1 class="font-present text-6xl mb-6 mt-4 text-white-linen-800">wordle</h1>
-    <div class="w-3/5 mx-auto mb-4">
+    <header class="font-present text-6xl mb-8 mt-6 text-mulberry-400 tracking-widest">wordle</header>
+    <div class="w-3/5 mx-auto mb-10">
         <Board />
     </div>
     <div>
@@ -47,3 +47,10 @@
         </Modal>
     {/if}
 {/if}
+
+<style>
+    header {
+        text-shadow: 2px 1px 1px theme('colors.mulberry.500'), 4px 2px 1px theme('colors.mulberry.500'),
+            6px 3px 1px theme('colors.mulberry.500');
+    }
+</style>

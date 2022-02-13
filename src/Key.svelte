@@ -16,7 +16,7 @@
 />
 <span
     class={cx(
-        'px-3 py-2 inline-block text-sm uppercase rounded cursor-pointer',
+        'px-3 py-2 inline-block text-sm uppercase rounded cursor-pointer font-present',
         {
             [ALPHA_STATUS.CORRECT]: 'bg-green-300 hover:bg-green-400',
             [ALPHA_STATUS.CONTAINS]: 'bg-orange-300 hover:bg-orange-400',
