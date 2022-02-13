@@ -29,6 +29,7 @@
     "dependencies": {
         "@fontsource/exo-2": "^4.5.3",
         "@fontsource/rowdies": "^4.5.2",
+        "aico": "^0.1.1",
         "clsx": "^1.1.1",
         "delay": "^5.0.0",
         "lodash-es": "^4.17.21",

@@ -12,7 +12,8 @@
     import { getAlphaStatus, state, wait } from './store'
     import { ALPHA_STATUS } from './const'
     import delay from 'delay'
-    import { onDestroy, tick } from 'svelte'
+    import { onDestroy } from 'svelte'
+    import { aico } from 'aico'
     const { history, alphas } = state
 
     $: rows = defaults(
@@ -31,19 +32,16 @@
         EMPTY_ROWS
     ).slice(0, 6) as Cell[][]
 
-    let destroyed = false
     let shakeRow = -1
-    onDestroy(() => (destroyed = true))
-    ;(async () => {
+    const loop = aico(function* (signal) {
         while (true) {
-            await wait('wrong')
-            if (destroyed) return
+            yield wait('wrong')
             shakeRow = $history.length
-            await delay(500)
-            if (destroyed) return
+            yield delay(500, { signal })
             shakeRow = -1
         }
-    })()
+    })
+    onDestroy(() => loop.abort())
 </script>
 
 <div class="grid gap-y-4 gap-x-2 grid-cols-5">

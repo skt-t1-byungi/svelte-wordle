@@ -6,6 +6,7 @@ specifiers:
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.30
   '@tsconfig/svelte': ^2.0.1
   '@types/lodash-es': ^4.17.5
+  aico: ^0.1.1
   autoprefixer: ^10.4.2
   clsx: ^1.1.1
   delay: ^5.0.0
@@ -26,6 +27,7 @@ specifiers:
 dependencies:
   '@fontsource/exo-2': 4.5.4
   '@fontsource/rowdies': 4.5.2
+  aico: 0.1.1
   clsx: 1.1.1
   delay: 5.0.0
   lodash-es: 4.17.21
@@ -180,6 +182,10 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: true
+
+  /aico/0.1.1:
+    resolution: {integrity: sha512-yJ8OlvsNJXwRva43KuXl+3sS8Ame+veQxY4sOgAy4GYQ5Rv7wzj0B7n7YgSh4oqzUd1DHCMSSTbDFEj+oXS/fA==}
+    dev: false
 
   /ansi-styles/3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
