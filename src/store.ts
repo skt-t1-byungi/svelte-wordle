@@ -3,7 +3,11 @@ import type { Readable } from 'svelte/store'
 import { writable, derived, get } from 'svelte/store'
 import { ALPHA_STATUS } from './const'
 import { createNanoEvents } from 'nanoevents'
-import dataset from './dataset.json'
+import rawAllowsData from './allowsData.json'
+import rawAnswersData from './answersData.json'
+
+const allowsSet = new Set(rawAllowsData)
+const answersSet = new Set(rawAnswersData)
 
 const status = writable<'before' | 'playing' | 'end'>('before')
 const history = writable<string[][]>([])
@@ -33,7 +37,7 @@ ee.on('start', () => {
     status.set('playing')
     history.set([])
     alphas.set([])
-    answer.set(sample(dataset))
+    answer.set(sample(rawAnswersData))
     console.log(`Answer: ${get(answer)}`)
 })
 ee.on('type', alpha => {
@@ -63,7 +67,7 @@ ee.on('enter', () => {
         emit('end', true)
         return
     }
-    if (!dataset.includes(word)) {
+    if (!answersSet.has(word) && !allowsSet.has(word)) {
         emit('wrong')
         return
     }
