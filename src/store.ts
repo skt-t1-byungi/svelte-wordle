@@ -59,20 +59,20 @@ ee.on('enter', () => {
     const word = $alphas.join('')
     if (word === get(answer)) {
         history.update(v => [...v, $alphas])
-        dispatch('end', true)
+        emit('end', true)
         return
     }
     if (!dataset.includes(word)) {
-        dispatch('wrong')
+        emit('wrong')
         return
     }
     history.update(v => [...v, $alphas])
     alphas.set([])
     if (get(history).length === 6) {
-        dispatch('end', false)
+        emit('end', false)
         return
     }
-    dispatch('next')
+    emit('next')
 })
 ee.on('end', () => {
     assertPlaying()
@@ -80,17 +80,23 @@ ee.on('end', () => {
     status.set('end')
 })
 
-export function dispatch<K extends keyof Events>(name: K, ...args: Parameters<Events[K]>) {
+export function emit<K extends keyof Events>(name: K, ...args: Parameters<Events[K]>) {
     return ee.emit(name, ...args)
 }
 
-export function wait<K extends keyof Events>(name: K) {
+export function wait<K extends keyof Events>(name: K, { signal }: { signal?: AbortSignal } = {}) {
     type Arg = Parameters<Events[K]>[0]
-    return new Promise<Arg>(resolve => {
+    return new Promise<Arg>((resolve, reject) => {
         const off = ee.on(name, ((v: Arg) => {
+            signal.removeEventListener('abort', onAbort)
             off()
             resolve(v)
         }) as any)
+        const onAbort = () => {
+            off()
+            reject()
+        }
+        signal.addEventListener('abort', onAbort)
     })
 }
 

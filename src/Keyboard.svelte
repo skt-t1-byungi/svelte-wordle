@@ -5,7 +5,7 @@
 <script lang="ts">
     import { ALPHA_STATUS } from './const'
     import Key from './Key.svelte'
-    import { dispatch, state, getAlphaStatus } from './store'
+    import { emit, state, getAlphaStatus } from './store'
 
     const { status, history } = state
 
@@ -21,17 +21,13 @@
 {#each LAYOUT as cols, i}
     <div class="space-y-2 space-x-1 ">
         {#if i === 2}
-            <Key key="Enter" on:press={() => isPlaying && dispatch('enter')} />
+            <Key key="Enter" on:press={() => isPlaying && emit('enter')} />
         {/if}
         {#each cols as key}
-            <Key
-                {key}
-                on:press={() => isPlaying && dispatch('type', key)}
-                status={statusMap[key] ?? ALPHA_STATUS.NONE}
-            />
+            <Key {key} on:press={() => isPlaying && emit('type', key)} status={statusMap[key] ?? ALPHA_STATUS.NONE} />
         {/each}
         {#if i === 2}
-            <Key key="Backspace" on:press={() => isPlaying && dispatch('del')}>Back</Key>
+            <Key key="Backspace" on:press={() => isPlaying && emit('del')}>Back</Key>
         {/if}
     </div>
 {/each}

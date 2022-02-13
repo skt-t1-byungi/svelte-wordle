@@ -3,11 +3,11 @@
     import Board from './Board.svelte'
     import Keyboard from './Keyboard.svelte'
     import Modal from './Modal.svelte'
-    import { dispatch, state } from './store'
+    import { emit, state } from './store'
     const { status, isWin, answer } = state
 
     function start() {
-        dispatch('start')
+        emit('start')
     }
 </script>
 

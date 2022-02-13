@@ -35,7 +35,7 @@
     let shakeRow = -1
     const loop = aico(function* (signal) {
         while (true) {
-            yield wait('wrong')
+            yield wait('wrong', { signal })
             shakeRow = $history.length
             yield delay(500, { signal })
             shakeRow = -1
