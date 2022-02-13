@@ -34,6 +34,7 @@ ee.on('start', () => {
     history.set([])
     alphas.set([])
     answer.set(sample(dataset))
+    console.log(`Answer: ${get(answer)}`)
 })
 ee.on('type', alpha => {
     assertPlaying()
@@ -88,7 +89,7 @@ export function wait<K extends keyof Events>(name: K, { signal }: { signal?: Abo
     type Arg = Parameters<Events[K]>[0]
     return new Promise<Arg>((resolve, reject) => {
         const off = ee.on(name, ((v: Arg) => {
-            signal.removeEventListener('abort', onAbort)
+            signal?.removeEventListener('abort', onAbort)
             off()
             resolve(v)
         }) as any)
@@ -96,7 +97,7 @@ export function wait<K extends keyof Events>(name: K, { signal }: { signal?: Abo
             off()
             reject()
         }
-        signal.addEventListener('abort', onAbort)
+        signal?.addEventListener('abort', onAbort)
     })
 }
 

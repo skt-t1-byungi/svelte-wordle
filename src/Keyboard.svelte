@@ -19,7 +19,7 @@
 </script>
 
 {#each LAYOUT as cols, i}
-    <div class="space-y-2 space-x-1 ">
+    <div class="space-y-2.5 space-x-1.5">
         {#if i === 2}
             <Key key="Enter" on:press={() => isPlaying && emit('enter')} />
         {/if}

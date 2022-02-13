@@ -5,9 +5,11 @@ specifiers:
   '@fontsource/rowdies': ^4.5.2
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.30
   '@tsconfig/svelte': ^2.0.1
+  '@types/canvas-confetti': ^1.4.2
   '@types/lodash-es': ^4.17.5
   aico: ^0.1.1
   autoprefixer: ^10.4.2
+  canvas-confetti: ^1.5.1
   clsx: ^1.1.1
   delay: ^5.0.0
   gh-pages: ^3.2.3
@@ -28,6 +30,7 @@ dependencies:
   '@fontsource/exo-2': 4.5.4
   '@fontsource/rowdies': 4.5.2
   aico: 0.1.1
+  canvas-confetti: 1.5.1
   clsx: 1.1.1
   delay: 5.0.0
   lodash-es: 4.17.21
@@ -36,6 +39,7 @@ dependencies:
 devDependencies:
   '@sveltejs/vite-plugin-svelte': 1.0.0-next.36_svelte@3.46.3+vite@2.7.13
   '@tsconfig/svelte': 2.0.1
+  '@types/canvas-confetti': 1.4.2
   '@types/lodash-es': 4.17.5
   autoprefixer: 10.4.2_postcss@8.4.5
   gh-pages: 3.2.3
@@ -134,6 +138,10 @@ packages:
 
   /@tsconfig/svelte/2.0.1:
     resolution: {integrity: sha512-aqkICXbM1oX5FfgZd2qSSAGdyo/NRxjWCamxoyi3T8iVQnzGge19HhDYzZ6NrVOW7bhcWNSq9XexWFtMzbB24A==}
+    dev: true
+
+  /@types/canvas-confetti/1.4.2:
+    resolution: {integrity: sha512-t45KUDHlwrD9PJVRHc5z1SlXhO82BQEgMKUXGEV1KnWLFMPA6Y5LfUsLTHHzH9KcKDHZLEiYYH5nIDcjRKWNTg==}
     dev: true
 
   /@types/lodash-es/4.17.5:
@@ -299,6 +307,10 @@ packages:
   /caniuse-lite/1.0.30001304:
     resolution: {integrity: sha512-bdsfZd6K6ap87AGqSHJP/s1V+U6Z5lyrcbBu3ovbCCf8cSYpwTtGrCBObMpJqwxfTbLW6YTIdbb1jEeTelcpYQ==}
     dev: true
+
+  /canvas-confetti/1.5.1:
+    resolution: {integrity: sha512-Ncz+oZJP6OvY7ti4E1slxVlyAV/3g7H7oQtcCDXgwGgARxPnwYY9PW5Oe+I8uvspYNtuHviAdgA0LfcKFWJfpg==}
+    dev: false
 
   /chalk/2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}

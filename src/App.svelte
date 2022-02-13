@@ -3,11 +3,16 @@
     import Board from './Board.svelte'
     import Keyboard from './Keyboard.svelte'
     import Modal from './Modal.svelte'
+    import confetti from 'canvas-confetti'
     import { emit, state } from './store'
     const { status, isWin, answer } = state
 
     function start() {
         emit('start')
+    }
+
+    $: if ($status === 'end' && $isWin) {
+        confetti()
     }
 </script>
 
@@ -22,28 +27,23 @@
 </main>
 
 {#if $status === 'before'}
-    <Modal on:close={start}>
-        <div>
-            <h1>Welcome Worlde</h1>
-            <button on:click={start}>start</button>
-        </div>
+    <Modal>
+        <h1>Welcome <span class="font-present text-mulberry-600">WORLDE</span></h1>
+        <p class="mb-4">Pleas press start</p>
+        <button on:click={start}>start</button>
     </Modal>
 {:else if $status === 'end'}
     {#if $isWin}
-        <Modal on:close={start}>
-            <div>
-                <h1>Win</h1>
-                <p>Answer: {$answer}</p>
-                <button on:click={start}>restart</button>
-            </div>
+        <Modal>
+            <h1>You <span class="font-present text-mulberry-600">Win</span></h1>
+            <p class="mb-4">Answer: {$answer}</p>
+            <button on:click={start}>restart</button>
         </Modal>
     {:else}
-        <Modal on:close={start}>
-            <div>
-                <h1>Lose</h1>
-                <p>Answer: {$answer}</p>
-                <button on:click={start}>restart</button>
-            </div>
+        <Modal>
+            <h1>You <span class="font-present text-mulberry-600">Lose</span></h1>
+            <p class="mb-4">Answer: {$answer}</p>
+            <button on:click={start}>restart</button>
         </Modal>
     {/if}
 {/if}
@@ -52,5 +52,14 @@
     header {
         text-shadow: 2px 1px 1px theme('colors.mulberry.500'), 4px 2px 1px theme('colors.mulberry.500'),
             6px 3px 1px theme('colors.mulberry.500');
+    }
+    button {
+        @apply font-present underline decoration-orange-700 decoration-wavy decoration-2 text-xl uppercase p-3 bg-red-500 text-red-100 rounded-xl transition-[color] border-4 border-red-600;
+    }
+    button:hover {
+        @apply text-red-300;
+    }
+    button:active {
+        @apply scale-95;
     }
 </style>
