@@ -1,3 +1,12 @@
+@import '@fontsource/exo-2';
+@import '@fontsource/rowdies';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        @apply font-serif py-4 bg-white-linen-500;
+    }
+}

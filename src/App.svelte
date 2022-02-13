@@ -3,12 +3,16 @@
     import Board from './Board.svelte'
     import Keyboard from './Keyboard.svelte'
     import Modal from './Modal.svelte'
-    import { start, state } from './store'
-    const { status, isRight, answer } = state
+    import { dispatch, state } from './store'
+    const { status, isWin, answer } = state
+
+    function start() {
+        dispatch('start')
+    }
 </script>
 
 <main class="text-center max-w-xl mx-auto select-none">
-    <h1>wordle</h1>
+    <h1 class="font-present text-6xl mb-6 mt-4 text-white-linen-800">wordle</h1>
     <div class="w-3/5 mx-auto mb-4">
         <Board />
     </div>
@@ -25,7 +29,7 @@
         </div>
     </Modal>
 {:else if $status === 'end'}
-    {#if $isRight}
+    {#if $isWin}
         <Modal on:close={start}>
             <div>
                 <h1>Win</h1>

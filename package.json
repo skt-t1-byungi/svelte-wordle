@@ -27,7 +27,10 @@
         "vite": "^2.7.2"
     },
     "dependencies": {
+        "@fontsource/exo-2": "^4.5.3",
+        "@fontsource/rowdies": "^4.5.2",
         "clsx": "^1.1.1",
-        "lodash-es": "^4.17.21"
+        "lodash-es": "^4.17.21",
+        "nanoevents": "^6.0.2"
     }
 }
